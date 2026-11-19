@@ -1,28 +1,29 @@
 import { viteStaticCopy } from "vite-plugin-static-copy";
+import { scramjetPath } from "@mercuryworkshop/scramjet/path";
+import { controllerPath } from "@mercuryworkshop/scramjet-controller/path"
 
 export default {
-
 	server: {
-    		allowedHosts: [".trycloudflare.com"],
-  		proxy: {
-  		    "/wisp": {
-   	 	    	target: "ws://localhost:4142",
-   		      	ws: true,
-				rewrite: () => "/",
-  		      },
- 		   },
-		},
-
+		allowedHosts: [".trycloudflare.com"],
+			proxy: {
+				"/wisp": {
+					target: "ws://localhost:4142",
+					ws: true,
+					rewrite: () => "/",
+				},
+			},
+	},
+	
 	plugins: [
 		viteStaticCopy({
 			structured: false,
 			targets: [
 				{
-					src: "../core/dist/*",
+					src: scramjetPath + "/*",
 					dest: "scramjet",
 				},
 				{
-					src: "../controller/dist/*",
+					src: controllerPath + "/*",
 					dest: "controller",
 				},
 			],
